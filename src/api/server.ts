@@ -27,7 +27,7 @@ app.get("/orders/:id", (req, res) => {
 });
 
 app.post("/orders", (req, res) => {
-  const items: OrderItem[] = req.body?.items;
+    const items: OrderItem[] = Array.isArray(req.body) ? req.body : req.body?.items;
 
   if (!Array.isArray(items) || items.length === 0) {
     res.status(400).json({ error: "Informe ao menos um item em 'items'" });

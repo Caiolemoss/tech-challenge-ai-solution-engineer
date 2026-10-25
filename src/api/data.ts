@@ -34,6 +34,13 @@ export const products: Product[] = [
 
 export const orders: Order[] = [
   {
+    id: 1041,
+    items: [{ productId: 1, quantity: 5 }],
+    total: 399.5,
+    status: "shipped",
+    createdAt: "2026-10-18T11:30:00.000Z",
+  },
+  {
     id: 1042,
     items: [{ productId: 5, quantity: 2 }],
     total: 49.8,

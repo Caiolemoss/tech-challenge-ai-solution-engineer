@@ -193,4 +193,9 @@ O prompt define:
 
 ## Uso de IA no desenvolvimento
 
-[PREENCHER: descreva, com as suas palavras, como usou IA no projeto (por exemplo, para tirar dúvidas e revisar código) e o que você mesmo decidiu e testou.]
+## Uso de IA no desenvolvimento
+
+Usei o Claude (pelo chat, sem o Claude Code) durante todo o projeto, como apoio e como professor: ele me explicou os conceitos que não conhecia e sugeriu o código passo a passo nos meus momentos de dificuldade. Eu criei os arquivos, rodei, testei e corrigi os erros que apareceram.
+
+Sempre pedi explicações do "porquê" de cada etapa, para entender o que estou entregando e conseguir defender as escolhas na próxima fase.
+
