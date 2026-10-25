@@ -23,6 +23,16 @@ O projeto foi dividido em 4 partes, cada uma com um trabalho.
 - API mock: O estoque ficticio e o sistema da loja, guardados em memoria.
 
 O que acontece quando o cliente chama algo?
+
+```
+Cliente → Chat → Agente (Gemini) → Tools → API mock
+```
+
+A mensagem vai do chat até o agente. Se o agente precisar de dados da loja, ele usa uma tool, que consulta a API, e a resposta volta pelo mesmo caminho.
+
+Organização das pastas:
+
+```
 src/
 ├── api/
 │   ├── data.ts          # produtos e pedidos
@@ -35,6 +45,7 @@ src/
 │   └── system-prompt.ts # personalidade e regras do Ned
 ├── config.ts            # lê o arquivo .env (chave e modelo)
 └── cli.ts               # o chat no terminal
+```
 
 ## Como rodar
 
@@ -87,7 +98,7 @@ O modelo 2.5 flash estava com respostas mais rapidas e naturais, porem, o limite
 Servidor Express com dados em memória (sem banco). Ao reiniciar, estoque e pedidos voltam ao início.
 
 | Método | Rota | O que faz |
-
+|---|---|---|
 | GET | `/products` | Lista os produtos |
 | GET | `/products/:id` | Detalhes de um produto |
 | GET | `/orders/:id` | Consulta um pedido |
