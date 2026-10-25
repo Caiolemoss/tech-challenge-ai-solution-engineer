@@ -6,9 +6,9 @@ import { SYSTEM_PROMPT } from "./system-prompt";
 const MAX_STEPS = 6; // trava de segurança contra loops infinitos de tools
 const ai = new GoogleGenAI({ apiKey: config.geminiApiKey });
 
-// Se o Gemini estiver sobrecarregado (503) ou no limite (429), espera e tenta de novo.
+// Se o Gemini estiver sobrecarregado (503) ou no limite por minuto (429), espera e tenta de novo.
 async function generateWithRetry(contents: Content[]) {
-  const maxAttempts = 3;
+  const maxAttempts = 4;
   for (let attempt = 1; ; attempt++) {
     try {
       return await ai.models.generateContent({
@@ -20,10 +20,14 @@ async function generateWithRetry(contents: Content[]) {
         },
       });
     } catch (err) {
-      const status = (err as { status?: number }).status;
-      const retryable = status === 503 || status === 429;
+      const message = err instanceof Error ? err.message : "";
+      const code =
+        (err as { status?: number }).status ?? Number(/"code":(\d+)/.exec(message)?.[1]);
+      const dailyQuota = message.includes("PerDay");
+      const retryable = code === 503 || (code === 429 && !dailyQuota);
       if (!retryable || attempt >= maxAttempts) throw err;
-      await new Promise((resolve) => setTimeout(resolve, 1000 * 2 ** (attempt - 1)));
+      const waitMs = code === 429 ? 15000 : 3000 * attempt;
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
     }
   }
 }

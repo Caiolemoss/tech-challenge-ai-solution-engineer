@@ -10,6 +10,6 @@ function required(name: string): string {
 
 export const config = {
   geminiApiKey: required("GEMINI_API_KEY"),
-  geminiModel: process.env.GEMINI_MODEL ?? "gemini-3.5-flash",
+  geminiModel: process.env.GEMINI_MODEL ?? "gemini-3.8-flash",
   apiBaseUrl: process.env.API_BASE_URL ?? "http://localhost:3000",
 };
