@@ -4,6 +4,16 @@ import { products, orders, Order, OrderItem } from "./data";
 const app = express();
 app.use(express.json());
 
+// Loga cada chamada quando a resposta termina: método, rota, status, tempo e o body (se houver)
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on("finish", () => {
+    const body = req.method === "POST" ? ` body=${JSON.stringify(req.body)}` : "";
+    console.log(`[api] ${req.method} ${req.originalUrl} -> ${res.statusCode} (${Date.now() - start}ms)${body}`);
+  });
+  next();
+});
+
 app.get("/products", (_req, res) => {
   res.json(products);
 });
