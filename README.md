@@ -44,23 +44,33 @@ Conversas reais, numa única sessão, na ordem do desafio. Entre colchetes estã
 
 ```text
 Você: Quais produtos vocês têm disponíveis?
-Ned: Oi! Aqui é o Ned, da Tech Tudo. Temos uma boa variedade de acessórios para o seu setup.
+Ned: Oi! Aqui é o Ned, da Tech Tudo. Temos bastante coisa para computador e celular. Vou listar por categoria:
 
-Para mouse, tenho o sem fio da Nexa, que é bem confortável na mão e recarrega por cabo USB, e o sem fio compacto da Orbit, que é ótimo para levar na mochila e funciona com uma pilha AA. Também tenho mousepad grande da Orbit, de 80x30cm, que cobre mouse e teclado e não escorrega na mesa.
+Mouse: tenho sem fio da Nexa, mais confortável na mão e recarregável por USB, por R$ 79,90, e também sem fio da Orbit, mais compacto e bom para levar na mochila, por R$ 59,90.
 
-Para teclado, tenho o com fio da Volt, padrão ABNT2 com ç e teclado numérico, e o sem fio Bluetooth da Nexa, que conecta em até dois aparelhos, como computador e celular.
+Teclado: tenho com fio da Volt, padrão ABNT2 com ç e teclado numérico, por R$ 129,90, e sem fio Bluetooth da Nexa, que conecta em até dois aparelhos, por R$ 159,90.
 
-Também temos pendrive de 32GB da Nexa, cabo USB-C de 1 metro da Orbit que aceita carregamento rápido, e caixa de som para PC da Nexa, compacta e com entrada USB e P2. O cabo USB comum da Volt está em falta no momento.
+Mousepad: da Orbit, grande (80x30 cm), cabe mouse e teclado, com base antiderrapante, por R$ 29,90.
 
-Quer que eu te conte mais sobre algum desses ou que eu veja o preço de algum?
+Armazenamento: pendrive de 32GB da Nexa, USB 3.0, por R$ 39,90.
+
+Cabos: cabo USB-C de 1 metro da Orbit, que aceita carregamento rápido, por R$ 24,90.
+
+Caixa de som para PC da Nexa, compacta, com USB e entrada P2, por R$ 89,90.
+
+Quer que eu detalhe algum desses ou já monte um pedido?
 [API: GET /products]
 
 Você: Me mostra só os produtos que estão em estoque.
-Ned: Aqui estão os produtos que estão disponíveis agora. Só o cabo USB comum da Volt está em falta.
+Ned: Estes estão disponíveis agora:
 
-Em mouse, tenho o sem fio da Nexa e o sem fio compacto da Orbit, que é ótimo para a mochila. Para teclado, tenho o com fio da Volt, no padrão ABNT2 com ç e teclado numérico, e o sem fio Bluetooth da Nexa, que conecta em até dois aparelhos. Também tenho o mousepad grande da Orbit, que cobre mouse e teclado. Para outros acessórios, tem o pendrive de 32GB da Nexa, o cabo USB-C de 1 metro da Orbit e a caixa de som compacta para PC da Nexa.
+Mouse sem fio da Nexa, por R$ 79,90, e mouse sem fio da Orbit, por R$ 59,90. Também tenho teclado com fio da Volt, por R$ 129,90, e teclado sem fio da Nexa, por R$ 159,90.
 
-Quer que eu passe o preço de algum deles ou dê mais detalhes para escolher?
+Do mousepad da Orbit, por R$ 29,90, tenho em estoque. O pendrive de 32GB da Nexa, por R$ 39,90, também está disponível, assim como o cabo USB-C de 1 metro da Orbit, por R$ 24,90, e a caixa de som para PC da Nexa, por R$ 89,90.
+
+O único que está em falta é o cabo USB comum da Volt.
+
+Quer que eu detalhe algum deles ou já monte um pedido?
 [API: GET /products]
 ```
 </details>
@@ -70,15 +80,15 @@ Quer que eu passe o preço de algum deles ou dê mais detalhes para escolher?
 
 ```text
 Você: Me conta mais sobre o produto 3.
-Ned: O produto 3 é o teclado com fio da Volt. Ele usa o padrão ABNT2, com ç e teclado numérico, e tem teclas macias e silenciosas, então é uma boa escolha para trabalhar ou estudar sem incomodar quem está por perto. Custa R$ 129,90.
+Ned: O produto 3 é o teclado com fio da Volt, por R$ 129,90. Ele se conecta por USB e tem o padrão ABNT2, com ç e teclado numérico. As teclas são macias e silenciosas, então dá para usar o dia todo, seja trabalhando ou estudando, sem incomodar quem está por perto.
 
-Quer que eu reserve um para você ou prefere comparar com o teclado sem fio da Nexa?
+Quer que eu monte um pedido com ele?
 [API: GET /products/3, GET /products]
 
 Você: E quanto custa o produto 2?
-Ned: O produto 2 é o mousepad grande da Orbit, de 80x30cm, que cobre mouse e teclado e tem base antiderrapante, então não fica escorregando na mesa. Custa R$ 29,90.
+Ned: O produto 2 é o mousepad da Orbit, por R$ 29,90. Ele é grande, de 80x30 cm, cabe mouse e teclado, e a base antiderrapante evita que ele saia do lugar na mesa.
 
-Quer que eu monte um pedido com ele?
+Quer que eu inclua no pedido?
 [API: GET /products/2]
 ```
 </details>
@@ -88,15 +98,19 @@ Quer que eu monte um pedido com ele?
 
 ```text
 Você: Quero comprar 2 unidades do produto 1 e 1 unidade do produto 4.
-Ned: Pedido feito! O número é **1044**. Ele tem 2 mouses sem fio da Nexa, a R$ 79,90 cada, e 1 pendrive de 32GB da Nexa, a R$ 39,90. O total ficou em **R$ 199,70**, e o pedido está aguardando envio.
+Ned: Pedido criado! O número é 1044 e ficou assim:
 
-Posso ajudar com mais alguma coisa?
-[API: POST /orders, GET /products/1, GET /products/4]
+2 unidades do mouse sem fio da Nexa, a R$ 79,90 cada, e 1 pendrive de 32GB da Nexa, a R$ 39,90.
+
+O total é R$ 199,70. O pedido está aguardando envio.
+
+Precisa de mais alguma coisa?
+[API: GET /products/1, GET /products/4, POST /orders]
 
 Você: Adiciona também 3 unidades do último que você me mostrou.
-Ned: Como pedidos já criados não podem ser alterados, fiz um pedido separado para os 3 mousepads grandes da Orbit. O número é **1045**, o total ficou em **R$ 89,70** (3 unidades a R$ 29,90), e ele está aguardando envio.
+Ned: Pronto! Como pedidos não podem ser alterados depois de criados, fiz um pedido separado: o número é 1045, com 3 unidades do mousepad da Orbit, a R$ 29,90 cada. O total é R$ 89,70 e o pedido está aguardando envio.
 
-O pedido 1044 continua como estava.
+Precisa de mais alguma coisa?
 [API: POST /orders]
 ```
 
@@ -108,15 +122,15 @@ A API não permite alterar pedidos, por isso o Ned criou um pedido separado e av
 
 ```text
 Você: Qual o status do pedido 1042?
-Ned: O pedido 1042 já foi enviado. Ele tem 2 cabos USB-C de 1 metro da Orbit, que servem para celular e outros aparelhos com entrada Type-C e aceitam carregamento rápido. O total foi de R$ 49,80, e a data do pedido é 18/10/2026.
+Ned: O pedido 1042 já foi enviado. Ele tem 2 unidades do cabo USB-C de 1 metro da Orbit, a R$ 24,90 cada, com total de R$ 49,80.
 
-Posso ajudar com mais alguma coisa?
+Precisa de mais alguma coisa?
 [API: GET /orders/1042, GET /products/5]
 
 Você: E o que eu pedi nele mesmo?
-Ned: No pedido 1042 você comprou 2 unidades do cabo Type-C da Orbit, que tem 1 metro, aceita carregamento rápido e serve para celular e outros aparelhos com entrada Type-C. Cada unidade custa R$ 24,90, então o total deu R$ 49,80.
+Ned: No pedido 1042 você comprou 2 unidades do cabo USB-C de 1 metro da Orbit, a R$ 24,90 cada, com total de R$ 49,80. Ele já foi enviado. O cabo serve para celular e outros aparelhos com entrada Type-C.
 
-Posso ajudar com mais alguma coisa?
+Precisa de mais alguma coisa?
 [API: GET /orders/1042, GET /products/5]
 ```
 </details>
@@ -126,17 +140,17 @@ Posso ajudar com mais alguma coisa?
 
 ```text
 Você: Me fala do produto 999.
-Ned: Não encontrei nenhum produto com o número 999 na loja. Confere se o número está certo? Se quiser, posso listar o catálogo para você ver os produtos disponíveis.
+Ned: Não encontrei nenhum produto com o código 999 na loja. Confere se o número está certo? Se quiser, posso listar os produtos disponíveis para você escolher.
 [API: GET /products/999]
 
 Você: Quero comprar 1000 unidades do produto 1.
-Ned: Não consegui fazer esse pedido. Temos só 23 unidades do mouse sem fio da Nexa no momento, então não dá para atender 1000.
+Ned: Não consegui fazer esse pedido. O mouse sem fio da Nexa tem só 23 unidades disponíveis, e 1000 é bem mais do que isso.
 
-Se quiser, posso fazer o pedido com as 23 unidades disponíveis. Também tenho o mouse sem fio compacto da Orbit, que é outra opção. Quantas unidades você precisa?
+Posso fazer o pedido com até 23 unidades. Se preferir, também tenho o mouse sem fio da Orbit, por R$ 59,90. Quantas unidades você quer?
 [API: POST /orders]
 
 Você: Qual o status do pedido 9999?
-Ned: Não encontrei nenhum pedido com o número 9999. Confere se o número está certo? Se você tiver outro número de pedido, posso consultar para você.
+Ned: Não encontrei nenhum pedido com o número 9999. Confere se o número está certo? Se você tiver o número do pedido que procura, posso consultar para você.
 [API: GET /orders/9999]
 ```
 
@@ -148,13 +162,13 @@ A API recusou o pedido de 1000 unidades, e nada foi criado. O estoque de 23 já 
 
 ```text
 Você: Qual a previsão do tempo em SP?
-Ned: Essa eu não consigo ajudar, sou o atendimento da Tech Tudo e só posso falar sobre nossos produtos e pedidos. Se quiser, posso te ajudar a escolher um acessório para o seu setup ou consultar algum pedido.
+Ned: Essa eu não consigo ajudar, sou o atendente da Tech Tudo e só tenho informações sobre produtos e pedidos da loja. Se quiser, posso te ajudar a escolher um mouse, um teclado ou outro acessório, ou consultar algum pedido seu.
 [API: nenhuma]
 
 Você: Cancela meu pedido 1042.
-Ned: Não consigo cancelar pedidos por aqui, sinto muito. Para cancelar o pedido 1042, você vai precisar entrar em contato com a nossa equipe de atendimento.
+Ned: Não consigo cancelar pedidos nem fazer alterações em pedidos já criados. Também não tenho como registrar esse tipo de pedido por aqui.
 
-Como o 1042 já consta como enviado, vale falar com eles o quanto antes. Posso ajudar com mais alguma coisa, como consultar outro pedido ou conferir um produto?
+Posso te ajudar com outra coisa, como consultar o status de algum pedido ou montar um novo.
 [API: nenhuma]
 ```
 </details>
