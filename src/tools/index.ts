@@ -77,7 +77,7 @@ const handlers: Record<string, (args: Args) => Promise<ApiResult>> = {
       productId: Number(i.product_id),
       quantity: Number(i.quantity),
     }));
-    return api.post("/orders", { items: payload });
+    return api.post("/orders", payload);
   },
 };
 
@@ -86,5 +86,10 @@ export async function executeTool(name: string, args: Args): Promise<ApiResult> 
   if (!handler) {
     return { ok: false, error: `Ferramenta desconhecida: ${name}` };
   }
-  return handler(args);
+  try {
+    return await handler(args);
+  } catch {
+    // Argumentos malformados do modelo viram erro para ele ler, em vez de derrubar o turno.
+    return { ok: false, error: `Argumentos inválidos para ${name}.` };
+  }
 }

@@ -27,37 +27,42 @@ app.get("/orders/:id", (req, res) => {
 });
 
 app.post("/orders", (req, res) => {
-    const items: OrderItem[] = Array.isArray(req.body) ? req.body : req.body?.items;
-
+  const items: OrderItem[] = req.body;
   if (!Array.isArray(items) || items.length === 0) {
-    res.status(400).json({ error: "Informe ao menos um item em 'items'" });
+    res.status(400).json({ error: "Envie uma lista com ao menos um item: [{ productId, quantity }]" });
     return;
+  }
+
+  // Soma as quantidades por produto, para que um item repetido não fure o estoque
+  const quantities = new Map<number, number>();
+  for (const item of items) {
+    if (!Number.isInteger(item?.quantity) || item.quantity <= 0) {
+      res.status(400).json({ error: "A quantidade deve ser um inteiro maior que zero" });
+      return;
+    }
+    quantities.set(item.productId, (quantities.get(item.productId) ?? 0) + item.quantity);
   }
 
   // 1ª passada: valida tudo ANTES de mexer no estoque
   let total = 0;
-  for (const item of items) {
-    if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
-      res.status(400).json({ error: "A quantidade deve ser um inteiro maior que zero" });
-      return;
-    }
-    const product = products.find((p) => p.id === item.productId);
+  for (const [productId, quantity] of quantities) {
+    const product = products.find((p) => p.id === productId);
     if (!product) {
-      res.status(404).json({ error: `Produto ${item.productId} não encontrado` });
+      res.status(404).json({ error: `Produto ${productId} não encontrado` });
       return;
     }
-    if (product.stock < item.quantity) {
+    if (product.stock < quantity) {
       res.status(400).json({
-        error: `Estoque insuficiente para "${product.name}": pedido ${item.quantity}, disponível ${product.stock}`,
+        error: `Estoque insuficiente para "${product.name}": pedido ${quantity}, disponível ${product.stock}`,
       });
       return;
     }
-    total += product.price * item.quantity;
+    total += product.price * quantity;
   }
 
   // 2ª passada: tudo válido, agora sim baixa o estoque
-  for (const item of items) {
-    products.find((p) => p.id === item.productId)!.stock -= item.quantity;
+  for (const [productId, quantity] of quantities) {
+    products.find((p) => p.id === productId)!.stock -= quantity;
   }
 
   const order: Order = {

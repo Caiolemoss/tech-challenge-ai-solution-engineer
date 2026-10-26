@@ -102,9 +102,9 @@ Servidor Express com dados em memória (sem banco). Ao reiniciar, estoque e pedi
 | GET | `/products` | Lista os produtos |
 | GET | `/products/:id` | Detalhes de um produto |
 | GET | `/orders/:id` | Consulta um pedido |
-| POST | `/orders` | Cria um pedido (`{ "items": [{ "productId": 1, "quantity": 2 }] }`) |
+| POST | `/orders` | Cria um pedido (`[{ "productId": 1, "quantity": 2 }]`) |
 
-Os dados têm 9 produtos (com marca e descrição em linguagem simples) e 2 pedidos de exemplo (1042 e 1043). Um produto (Cabo USB) está sem estoque de propósito, para testar o caso de produto esgotado. As marcas são fictícias.
+Os dados têm 9 produtos (com marca e descrição em linguagem simples) e 3 pedidos de exemplo (1041, 1042 e 1043). Um produto (Cabo USB) está sem estoque de propósito, para testar o caso de produto esgotado. As marcas são fictícias.
 
 ## Tools do agente
 
@@ -142,8 +142,9 @@ O prompt define:
 
 - Produto ou pedido inexistente > API responde 404; a tool devolve a mensagem; o Ned explica sem inventar 
 - Estoque insuficiente ou produto esgotado > API responde 400 e nada é descontado; o Ned explica e sugere alternativa 
-- Modelo sobrecarregado (503) ou limite por minuto (429) > O agente espera e tenta de novo (até 4 tentativas) 
-- Cota diária do Gemini esgotada > Falha na hora (esperar não adianta) e o Ned avisa de forma amigável 
+- Modelo sobrecarregado (503) ou limite de cota (429) > O retry embutido do SDK espera e tenta de novo, com espera crescente (até 4 tentativas) 
+- Cota do Gemini esgotada mesmo após as tentativas > O Ned avisa de forma amigável 
+- Mesmo produto repetido no pedido > A API soma as quantidades antes de conferir o estoque 
 - API mock fora do ar > A tool devolve um erro claro, em vez de quebrar o chat 
 - Falha no meio de uma resposta > O histórico volta ao estado anterior, sem corromper a conversa 
 - Modelo pedindo tools sem parar > Limite de 6 passos por mensagem 
@@ -190,8 +191,6 @@ O prompt define:
 - **Cancelar ou alterar pedidos:** exigiria novos endpoints na API e novas tools.
 - **Saber se a loja está aberta agora:** hoje o Ned informa os horários, mas não sabe a data e a hora atuais. Dá para injetar isso no prompt a cada mensagem (e uma lista de feriados).
 - **Dados:** dados em banco de dados mais completo e com mais produtos ao inves de memoria.
-
-## Uso de IA no desenvolvimento
 
 ## Uso de IA no desenvolvimento
 
