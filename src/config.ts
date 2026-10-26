@@ -8,8 +8,13 @@ function required(name: string): string {
   return value;
 }
 
+// O Runflow SDK lê RUNFLOW_API_KEY e RUNFLOW_TENANT_ID direto do ambiente; conferimos aqui para falhar logo no início.
+required("RUNFLOW_API_KEY");
+required("RUNFLOW_TENANT_ID");
+
 export const config = {
-  geminiApiKey: required("GEMINI_API_KEY"),
-  geminiModel: process.env.GEMINI_MODEL ?? "gemini-3.8-flash",
+  llmModel: process.env.LLM_MODEL ?? "anthropic/claude-haiku-5.5",
+  // Opcional: sem ela, a Runflow usa a credencial do OpenRouter cadastrada no painel.
+  openrouterKey: process.env.OPENROUTER_KEY || undefined,
   apiBaseUrl: process.env.API_BASE_URL ?? "http://localhost:3000",
 };
